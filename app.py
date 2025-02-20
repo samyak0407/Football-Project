@@ -2,6 +2,7 @@ import streamlit as st
 import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
+import numpy as np
 
 # Set page configuration with a background image
 st.set_page_config(
@@ -73,12 +74,7 @@ elif menu == "Data Visualizations":
         ax.set_title(f"Top 10 Players by {chart_selection}")
         st.pyplot(fig)
 
-# Adjust Player Contribution Based on Playtime
-if "Minutes" in df.columns:
-    df["Playtime Weight"] = df["Minutes"] / df["Minutes"].max()  # Normalize playtime (0-1 scale)
-    df["Fair Contribution"] = df["Goal Contribution"] * df["Playtime Weight"]
-    
+# Adjust Player Contribution Based on Playtime Using Log Scaling
+if "Minutes" in df.columns and "Goal Contribution" in df.columns:
+    df["Fair Contribution"] = df["Goal Contribution"] / np.log1p(df["Minutes"])  # Log-based normalization
     df = df.round(2)  # Ensure rounding is consistent
-
-
-
