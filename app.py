@@ -83,7 +83,7 @@ elif menu == "Compare Players":
         st.plotly_chart(fig)
 
 elif menu == "Data Visualizations":
-    st.subheader("Top Performers by Category")
+    st.subheader("Top Performers by Category (Min. 1000 Minutes)")
     numeric_columns = df.select_dtypes(include=[np.number]).columns.tolist()
     excluded_columns = ["Player", "Nation", "Pos", "Squad"]
     numeric_columns = [col for col in numeric_columns if col not in excluded_columns]
@@ -91,9 +91,9 @@ elif menu == "Data Visualizations":
     selected_metric = st.selectbox("Select Metric to View Top Players", numeric_columns)
 
     if selected_metric:
-        top_players = df.nlargest(10, selected_metric)
+        top_players = df[df["Minutes"] >= 1000].nlargest(10, selected_metric)
         fig = px.bar(top_players, x=selected_metric, y="Player", orientation='h',
-                     title=f"Top 10 Players by {selected_metric}", color="Player")
+                     title=f"Top 10 Players by {selected_metric} (Min. 1000 Minutes)", color="Player")
         st.plotly_chart(fig)
 
 elif menu == "Project Overview":
@@ -134,5 +134,5 @@ elif menu == "About Me":
     st.write("- **Reading Autobiographies:** Passionate about learning from influential figures in sports and business.")
     
     st.write("### Let's Connect!")
-    st.write("📧 Email: samyak.pokharna@example.com")
+    st.write("📧 Email: samyakp3a@illinois.edu")
     st.write("📱 LinkedIn: [linkedin.com/in/samyakpokharna](https://www.linkedin.com/in/samyakpokharna)")
