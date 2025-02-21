@@ -47,9 +47,12 @@ def load_data():
 
 df = load_data()
 
+# Identify correct column name for Minutes
+minutes_col = [col for col in df.columns if "Minute" in col][0]
+
 # Adjust Player Contribution Based on Playtime Using Weighted Normalization
-if "Minutes" in df.columns and "Goal Contribution" in df.columns:
-    df["Fair Contribution"] = (df["Goal Contribution"] * (df["Minutes"] / df["Minutes"].max())) * (1 - np.exp(-df["Minutes"] / 1500))
+if minutes_col in df.columns and "Goal Contribution" in df.columns:
+    df["Fair Contribution"] = (df["Goal Contribution"] * (df[minutes_col] / df[minutes_col].max())) * (1 - np.exp(-df[minutes_col] / 1500))
     df["Fair Contribution"] = df["Fair Contribution"].round(2)
 
 # Sidebar Navigation
@@ -91,7 +94,7 @@ elif menu == "Data Visualizations":
     selected_metric = st.selectbox("Select Metric to View Top Players", numeric_columns)
 
     if selected_metric:
-        top_players = df[df["Minutes"] >= 1000].nlargest(10, selected_metric)
+        top_players = df[df[minutes_col] >= 1000].nlargest(10, selected_metric)
         fig = px.bar(top_players, x=selected_metric, y="Player", orientation='h',
                      title=f"Top 10 Players by {selected_metric} (Min. 1000 Minutes)", color="Player")
         st.plotly_chart(fig)
@@ -134,5 +137,6 @@ elif menu == "About Me":
     st.write("- **Reading Autobiographies:** Passionate about learning from influential figures in sports and business.")
     
     st.write("### Let's Connect!")
-    st.write("📧 Email: samyakp3a@illinois.edu")
+    st.write("📧 Email: samyakp3@illinois.edu")
     st.write("📱 LinkedIn: [linkedin.com/in/samyakpokharna](https://www.linkedin.com/in/samyakpokharna)")
+
