@@ -48,7 +48,7 @@ def load_data():
 df = load_data()
 
 # Identify correct column name for Minutes
-minutes_col = [col for col in df.columns if "Minute" in col][0]
+minutes_col = "Min"  # Directly assigning since we confirmed the column name
 
 # Adjust Player Contribution Based on Playtime Using Weighted Normalization
 if minutes_col in df.columns and "Goal Contribution" in df.columns:
@@ -127,7 +127,7 @@ elif menu == "About Me":
     st.write("I am Samyak Pokharna, a passionate data scientist specializing in sports analytics, predictive modeling, and machine learning. My love for football statistics and data-driven decision-making inspired me to develop this project.")
     
     st.write("### Background:")
-    st.write("- **Education:** B.Tech in Mechanical Engineering, currently pursuing an MS in Analytics at UIUC.")
+    st.write("- **Education:** B.Tech in Mechanical Engineering, currently pursuing an MS in Analytics Statistics at UIUC.")
     st.write("- **Skills:** Predictive Analytics, Machine Learning, Data Visualization, Python, SQL, Tableau.")
     st.write("- **Experience:** Worked on projects in supply chain optimization, product analytics, and advanced sports data modeling.")
     
@@ -139,4 +139,3 @@ elif menu == "About Me":
     st.write("### Let's Connect!")
     st.write("📧 Email: samyakp3@illinois.edu")
     st.write("📱 LinkedIn: [linkedin.com/in/samyakpokharna](https://www.linkedin.com/in/samyakpokharna)")
-
