@@ -92,11 +92,16 @@ elif menu == "Data Visualizations":
     numeric_columns = [col for col in numeric_columns if col not in excluded_columns]
 
     selected_metric = st.selectbox("Select Metric to View Top Players", numeric_columns)
+    selected_position = st.selectbox("Filter by Position", ["All", "FW", "MF", "DF"])
 
     if selected_metric:
-        top_players = df[df[minutes_col] >= 1000].nlargest(10, selected_metric)
+        filtered_df = df[df[minutes_col] >= 1000]
+        if selected_position != "All":
+            filtered_df = filtered_df[filtered_df["Pos"] == selected_position]
+        
+        top_players = filtered_df.nlargest(10, selected_metric)
         fig = px.bar(top_players, x=selected_metric, y="Player", orientation='h',
-                     title=f"Top 10 Players by {selected_metric} (Min. 1000 Minutes)", color="Player")
+                     title=f"Top 10 {selected_position if selected_position != 'All' else ''} Players by {selected_metric} (Min. 1000 Minutes)", color="Player")
         st.plotly_chart(fig)
 
 elif menu == "Project Overview":
@@ -137,5 +142,5 @@ elif menu == "About Me":
     st.write("- **Reading Autobiographies:** Passionate about learning from influential figures in sports and business.")
     
     st.write("### Let's Connect!")
-    st.write("📧 Email: samyakp3@illinois.edu")
-    st.write("📱 LinkedIn: [linkedin.com/in/samyakpokharna](https://www.linkedin.com/in/samyakpokharna)")
+    st.write("Email: samyakp3@illinois.edu")
+    st.write("LinkedIn: [linkedin.com/in/samyakpokharna](https://www.linkedin.com/in/samyakpokharna)")
