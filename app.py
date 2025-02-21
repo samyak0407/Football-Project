@@ -3,6 +3,10 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
 import numpy as np
+import os
+
+# Ensure dependencies are installed
+os.system("pip install matplotlib seaborn numpy pandas")
 
 # Set page configuration with a background image
 st.set_page_config(
@@ -14,8 +18,9 @@ st.set_page_config(
 page_bg_img = '''
 <style>
 .stApp {
-    background: url("file:///Users/sam/Downloads/GettyImages-2184014913.webp");
+    background: url("https://raw.githubusercontent.com/samyak0407/Football-Project/main/GettyImages-2184014913.webp");
     background-size: cover;
+    background-position: center;
 }
 </style>
 '''
@@ -40,7 +45,7 @@ def load_data():
 df = load_data()
 
 # Sidebar Navigation
-menu = st.sidebar.radio("Navigation", ["Player Analysis", "Data Visualizations"])
+menu = st.sidebar.radio("Navigation", ["Player Analysis", "Data Visualizations", "Project Overview", "About Me"])
 
 if menu == "Player Analysis":
     st.subheader("Player Performance Data")
@@ -62,8 +67,11 @@ if menu == "Player Analysis":
     st.write(df_filtered)
 
 elif menu == "Data Visualizations":
-    available_columns = df.columns.tolist()
-    chart_selection = st.sidebar.radio("Select a Chart", ["None"] + available_columns)
+    # Only allow numeric columns for visualization
+    numeric_columns = df.select_dtypes(include=[np.number]).columns.tolist()
+    excluded_columns = ["Player", "Nation", "Pos", "Squad"]
+    numeric_columns = [col for col in numeric_columns if col not in excluded_columns]
+    chart_selection = st.sidebar.radio("Select a Chart", ["None"] + numeric_columns)
 
     if chart_selection != "None":
         st.title(f"Top Players Based on {chart_selection}")
@@ -74,7 +82,23 @@ elif menu == "Data Visualizations":
         ax.set_title(f"Top 10 Players by {chart_selection}")
         st.pyplot(fig)
 
+elif menu == "Project Overview":
+    st.title("Project Overview")
+    st.write("This project analyzes Premier League player performances using advanced data metrics.")
+    st.write("### Key Features:")
+    st.write("- Data filtering based on teams and positions")
+    st.write("- Advanced visualizations of player statistics")
+    st.write("- Fair Contribution metric that balances playtime and performance")
+    st.write("- Custom-built dashboard for intuitive data exploration")
+
+elif menu == "About Me":
+    st.title("About Me")
+    st.write("Hello! I'm Samyak Pokharna, a passionate data enthusiast with a background in Mechanical Engineering and Data Science.")
+    st.write("I enjoy working with data analytics, predictive modeling, and football-related analytics projects.")
+    st.write("This project was developed as part of my deep interest in sports analytics and machine learning.")
+
 # Adjust Player Contribution Based on Playtime Using Log Scaling
 if "Minutes" in df.columns and "Goal Contribution" in df.columns:
-    df["Fair Contribution"] = df["Goal Contribution"] / np.log1p(df["Minutes"])  # Log-based normalization
-    df = df.round(2)  # Ensure rounding is consistent
+    df["Fair Contribution"] = df["Goal Contribution"] / (np.log1p(df["Minutes"]) + 1)  # Improved Log-based normalization
+    df["Fair Contribution"] = df["Fair Contribution"].round(2)  # Ensure rounding
+
