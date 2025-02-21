@@ -47,10 +47,10 @@ def load_data():
 
 df = load_data()
 
-# Adjust Player Contribution Based on Playtime Using Exponential Decay Factor
+# Adjust Player Contribution Based on Playtime Using Weighted Normalization
 if "Minutes" in df.columns and "Goal Contribution" in df.columns:
-    df["Fair Contribution"] = df["Goal Contribution"] * (1 - np.exp(-df["Minutes"] / 1000))  # Improved fairness in ranking
-    df["Fair Contribution"] = df["Fair Contribution"].round(2)  # Ensure rounding
+    df["Fair Contribution"] = (df["Goal Contribution"] * (df["Minutes"] / df["Minutes"].max())) * (1 - np.exp(-df["Minutes"] / 1500))
+    df["Fair Contribution"] = df["Fair Contribution"].round(2)
 
 # Sidebar Navigation
 menu = st.sidebar.radio("Navigation", ["Player Analysis", "Compare Players", "Data Visualizations", "Project Overview", "About Me"])
@@ -134,5 +134,5 @@ elif menu == "About Me":
     st.write("- **Reading Autobiographies:** Passionate about learning from influential figures in sports and business.")
     
     st.write("### Let's Connect!")
-    st.write("📧 Email: samyakp3@illinois.edu")
+    st.write("📧 Email: samyak.pokharna@example.com")
     st.write("📱 LinkedIn: [linkedin.com/in/samyakpokharna](https://www.linkedin.com/in/samyakpokharna)")
