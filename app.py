@@ -47,74 +47,23 @@ def load_data():
 
 df = load_data()
 
+# Adjust Player Contribution Based on Playtime Using Exponential Decay Factor
+if "Minutes" in df.columns and "Goal Contribution" in df.columns:
+    df["Fair Contribution"] = df["Goal Contribution"] * (1 - np.exp(-df["Minutes"] / 1000))  # Improved fairness in ranking
+    df["Fair Contribution"] = df["Fair Contribution"].round(2)  # Ensure rounding
+
 # Sidebar Navigation
 menu = st.sidebar.radio("Navigation", ["Player Analysis", "Compare Players", "Data Visualizations", "Project Overview", "About Me"])
 
-if menu == "Project Overview":
-    st.title("Project Overview")
-    st.write("## Premier League Player Performance Predictor")
-    st.write("This project is a groundbreaking analysis tool designed to evaluate player performances in the Premier League with precision and fairness. By leveraging cutting-edge statistical methods, feature engineering, and machine learning, we provide a deep dive into player contributions beyond traditional metrics.")
-    
-    st.write("### Key Stages of the Project:")
-    st.write("#### 1. Data Collection & Cleaning:")
-    st.write("- Aggregated player statistics from reliable databases.")
-    st.write("- Removed inconsistencies, standardized naming conventions, and handled missing values.")
-    
-    st.write("#### 2. Feature Engineering:")
-    st.write("- Created unique metrics such as Expected Goal Contribution, Progressive Actions, and Fair Contribution Index.")
-    st.write("- Developed position-specific impact factors for more accurate player evaluation.")
-    
-    st.write("#### 3. Adjusting Bias in Player Rankings:")
-    st.write("- Traditional per 90-minute stats often overrate players with limited playtime.")
-    st.write("- Implemented logarithmic and square-root transformation methods to balance player rankings and ensure fairness.")
-    
-    st.write("#### 4. Engaging Data Visualization:")
-    st.write("- Used Plotly and Matplotlib for dynamic, interactive visualizations.")
-    st.write("- Integrated heatmaps, sunburst charts, radar graphs, and trend analytics.")
-    
-    st.write("#### 5. Machine Learning & Predictive Modeling:")
-    st.write("- Trained models to analyze future player performances and goal involvement probabilities.")
-    st.write("- Used regression and clustering to forecast statistical trends across seasons.")
-    
-    st.write("#### 6. Interactive Streamlit Dashboard:")
-    st.write("- Designed a fully functional, user-friendly interface to explore, compare, and analyze player statistics.")
-    st.write("- Added squad, positional, and statistical filtering to allow personalized analysis.")
-
-elif menu == "About Me":
-    st.title("About Me - Samyak Pokharna")
-    st.write("## Data Scientist | Football Analytics Enthusiast | Engineer")
-    st.write("I am Samyak Pokharna, a passionate data scientist with expertise in sports analytics, predictive modeling, and machine learning. My fascination with football statistics and data-driven decision-making led to the development of this analytical project.")
-    
-    st.write("### Professional Background:")
-    st.write("- **Education:** B.Tech in Mechanical Engineering, currently pursuing an MS in Analytics at UIUC.")
-    st.write("- **Skills:** Predictive Analytics, Machine Learning, Data Visualization, Python, SQL, Tableau.")
-    st.write("- **Industry Experience:** Worked on real-world projects in supply chain optimization, product analytics, and advanced sports data modeling.")
-    
-    st.write("### Personal Interests:")
-    st.write("- **Football:** A dedicated follower of the game, with a keen interest in tactical breakdowns and player evaluation.")
-    st.write("- **Cricket & Badminton:** Enjoys playing and analyzing strategies across multiple sports.")
-    st.write("- **Reading Autobiographies:** Passionate about learning from influential figures in sports, business, and leadership.")
-    
-    st.write("### Let's Connect!")
-    st.write("📧 Email: samyak.pokharna@example.com")
-    st.write("📱 LinkedIn: [linkedin.com/in/samyakpokharna](https://www.linkedin.com/in/samyakpokharna)")
-
-elif menu == "Player Analysis":
+if menu == "Player Analysis":
     st.subheader("Player Performance Data")
     squads = df["Squad"].unique()
     selected_squad = st.selectbox("Select a Squad", ["All"] + list(squads))
-
+    
     if selected_squad != "All":
         df_filtered = df[df["Squad"] == selected_squad]
     else:
         df_filtered = df
-
-    # Position-based Filtering Using "Pos" Column
-    positions = ["All"] + df["Pos"].unique().tolist()
-    selected_pos = st.sidebar.selectbox("Select Position", positions)
-
-    if selected_pos != "All":
-        df_filtered = df_filtered[df_filtered["Pos"] == selected_pos]
     
     st.write(df_filtered)
 
@@ -127,16 +76,63 @@ elif menu == "Compare Players":
         comparison_df = df[df["Player"].isin(selected_players)]
         st.write(comparison_df)
         
-        # Dynamic visualization with different chart types
         numeric_columns = df.select_dtypes(include=[np.number]).columns.tolist()
         selected_stat = st.selectbox("Select Statistic to Compare", numeric_columns)
-        chart_type = st.radio("Choose a Chart Type", ["Bar Chart", "Line Chart", "Radar Chart"])
         
-        if chart_type == "Bar Chart":
-            fig = px.bar(comparison_df, x="Player", y=selected_stat, title=f"Comparison of {selected_stat}", color="Player")
-        elif chart_type == "Line Chart":
-            fig = px.line(comparison_df, x="Player", y=selected_stat, title=f"Trend Analysis of {selected_stat}", color="Player", markers=True)
-        else:
-            fig = px.scatter_polar(comparison_df, r=selected_stat, theta="Player", title=f"Radar Comparison of {selected_stat}", color="Player")
-        
+        fig = px.bar(comparison_df, x="Player", y=selected_stat, title=f"Comparison of {selected_stat}", color="Player")
         st.plotly_chart(fig)
+
+elif menu == "Data Visualizations":
+    st.subheader("Top Performers by Category")
+    numeric_columns = df.select_dtypes(include=[np.number]).columns.tolist()
+    excluded_columns = ["Player", "Nation", "Pos", "Squad"]
+    numeric_columns = [col for col in numeric_columns if col not in excluded_columns]
+
+    selected_metric = st.selectbox("Select Metric to View Top Players", numeric_columns)
+
+    if selected_metric:
+        top_players = df.nlargest(10, selected_metric)
+        fig = px.bar(top_players, x=selected_metric, y="Player", orientation='h',
+                     title=f"Top 10 Players by {selected_metric}", color="Player")
+        st.plotly_chart(fig)
+
+elif menu == "Project Overview":
+    st.title("Project Overview")
+    st.write("## Premier League Player Performance Predictor")
+    st.write("This project is a comprehensive analytical tool designed to evaluate player performances in the Premier League fairly and precisely. We leverage advanced statistics, feature engineering, and machine learning to provide deep insights into player contributions beyond traditional metrics.")
+    
+    st.write("### Key Stages of the Project:")
+    st.write("#### 1. Data Collection & Cleaning:")
+    st.write("- Aggregated player statistics from trusted sources.")
+    st.write("- Removed inconsistencies, standardized naming conventions, and handled missing values.")
+    
+    st.write("#### 2. Feature Engineering:")
+    st.write("- Developed key metrics like Expected Goal Contribution, Progressive Actions, and Fair Contribution Index.")
+    st.write("- Introduced positional impact factors for better player evaluation.")
+    
+    st.write("#### 3. Machine Learning & Predictive Modeling:")
+    st.write("- Built predictive models to analyze future player performances and goal involvement probabilities.")
+    st.write("- Used regression and clustering techniques to forecast player trends.")
+    
+    st.write("#### 4. Dynamic Dashboard:")
+    st.write("- Created an interactive interface that allows users to analyze, compare, and explore player statistics.")
+    st.write("- Integrated squad and positional filtering for targeted insights.")
+
+elif menu == "About Me":
+    st.title("About Me - Samyak Pokharna")
+    st.write("## Data Scientist | Football Analytics Enthusiast | Engineer")
+    st.write("I am Samyak Pokharna, a passionate data scientist specializing in sports analytics, predictive modeling, and machine learning. My love for football statistics and data-driven decision-making inspired me to develop this project.")
+    
+    st.write("### Background:")
+    st.write("- **Education:** B.Tech in Mechanical Engineering, currently pursuing an MS in Analytics at UIUC.")
+    st.write("- **Skills:** Predictive Analytics, Machine Learning, Data Visualization, Python, SQL, Tableau.")
+    st.write("- **Experience:** Worked on projects in supply chain optimization, product analytics, and advanced sports data modeling.")
+    
+    st.write("### Interests:")
+    st.write("- **Football Enthusiast:** Loves analyzing player performances and tactical strategies.")
+    st.write("- **Cricket & Badminton:** Enjoys playing and studying the nuances of different sports.")
+    st.write("- **Reading Autobiographies:** Passionate about learning from influential figures in sports and business.")
+    
+    st.write("### Let's Connect!")
+    st.write("📧 Email: samyakp3@illinois.edu")
+    st.write("📱 LinkedIn: [linkedin.com/in/samyakpokharna](https://www.linkedin.com/in/samyakpokharna)")
