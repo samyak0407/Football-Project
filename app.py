@@ -156,31 +156,31 @@ if menu == "Project Overview":
         """
         The **Premier League Player Performance Predictor** is designed to provide an advanced statistical analysis of player contributions across different metrics. This project utilizes data science methodologies to refine raw performance data, generate insightful visualizations, and develop predictive models for a more comprehensive evaluation of players.
         
-        **Core Aspects of the Project:**
+        Core Aspects of the Project:
         
-        - **Data Cleaning & Preprocessing:**
+        - Data Cleaning & Preprocessing:
           - Standardization of player details including nationality, position, and playing time.
           - Handling missing data and ensuring consistency across datasets.
           - Formatting player birthdates and cleaning textual inconsistencies.
         
-        - **Feature Engineering & Metric Development:**
+        - Feature Engineering & Metric Development:
           - Constructing enhanced performance metrics like *Fair Contribution Score* to ensure unbiased evaluations.
           - Developing new features such as *Expected Goal Contribution per 90 minutes* to refine impact measurement.
         
-        - **Data Visualization & Interactive Analysis:**
+        - Data Visualization & Interactive Analysis:
           - Creating dynamic dashboards for in-depth exploration of player statistics.
           - Allowing comparisons between players, teams, and positions using interactive charts.
           - Integrating positional filters to categorize players into Forwards, Midfielders, and Defenders.
         
-        - **Predictive Analytics & Model Building:**
+        - Predictive Analytics & Model Building:
           - Implementing regression-based models to predict player impact based on past performance.
           - Analyzing correlations between key performance indicators and real-world contributions.
         
-        - **Web Scraping & Live Data Integration:**
+        - Web Scraping & Live Data Integration:
           - Automating data extraction from official Premier League sources to keep player statistics updated.
           - Expanding the dataset to include market valuation, injury records, and transfer insights.
         
-        - **Bias Reduction & Fair Evaluation:**
+        - Bias Reduction & Fair Evaluation:
           - Adjusting rankings to ensure that players with fewer minutes played do not disproportionately influence leaderboards.
           - Implementing filters to highlight top performers based on minimum playing time thresholds.
         
@@ -196,7 +196,7 @@ if menu == "About Me":
         """
         I am Samyak Pokharna, a data scientist passionate about football analytics. With an engineering background, I transitioned into AI-driven analytics, focusing on predictive modeling, machine learning, and visualization techniques.
 
-        Technical Skills:
+         Technical Skills:
         Data Analytics & Visualization (Python, SQL, Tableau, Power BI), 
         Machine Learning & Predictive Modeling (Regression, Classification, Time-Series Forecasting), 
         Data Engineering (Web Scraping, Data Cleaning, Feature Engineering), 
