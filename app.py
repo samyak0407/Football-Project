@@ -190,68 +190,70 @@ if menu == "About Me":
     st.write("📧 Email: samyakp3@illinois.edu")
     st.write("📱 LinkedIn: [linkedin.com/in/samyakpokharna](https://www.linkedin.com/in/samyakpokharna)")
     st.write("📂 GitHub: [github.com/samyak0407](https://github.com/samyak0407)")
-    # Custom CSS for text box to improve readability
-text_box_style = """
+   # Custom CSS for text box with opaque background
+opaque_box_style = """
     <style>
     .text-box {
-        background-color: rgba(0, 0, 0, 0.7);
+        background-color: rgba(0, 0, 0, 0.7);  /* Dark background with opacity */
         padding: 20px;
         border-radius: 10px;
         color: white;
         font-size: 18px;
+        margin: 20px 0;
     }
     </style>
 """
-st.markdown(text_box_style, unsafe_allow_html=True)
+st.markdown(opaque_box_style, unsafe_allow_html=True)
 
-# Ensure that text content is in a readable box
+# Function to display content inside an opaque box
+def display_text_box(title, content):
+    st.subheader(title)
+    st.markdown('<div class="text-box">', unsafe_allow_html=True)
+    st.write(content)
+    st.markdown('</div>', unsafe_allow_html=True)
+
+# Apply to Project Overview
 if menu == "Project Overview":
-    st.subheader("Project Overview")
-    st.markdown('<div class="text-box">', unsafe_allow_html=True)
-    st.write("""
-    This project is a **comprehensive analysis of Premier League player performance** using real-world data. 
-    We have implemented advanced **data processing, filtering, visualization, and modeling** techniques.
-    
-    - **Data Cleaning:** Standardized country names, removed duplicates, and ensured correct data formatting.
-    - **Feature Engineering:** Created new metrics to better represent **player contributions, efficiency, and consistency**.
-    - **Data Visualization:** Built interactive charts to compare performance metrics, allowing **position-based filtering**.
-    - **Machine Learning:** Developed a predictive model to estimate player market value based on performance statistics.
-    - **Web Deployment:** Hosted an interactive dashboard on **Streamlit**, allowing fans, analysts, and scouts to explore data dynamically.
-    """)
-    st.markdown('</div>', unsafe_allow_html=True)
+    display_text_box(
+        "Project Overview",
+        """
+        This project provides an in-depth analysis of Premier League player performances, leveraging advanced analytics, machine learning, and interactive visualizations.
+        
+        - **Data Cleaning:** Standardized country names, refined position classification, and formatted statistics.
+        - **Feature Engineering:** Created meaningful new metrics to better capture player impact.
+        - **Visual Analytics:** Implemented engaging interactive charts for player insights.
+        - **Machine Learning:** Developed predictive models to estimate player market value.
+        - **Deployment:** Hosted on Streamlit for easy access and exploration.
+        """
+    )
 
+# Apply to About Me
 if menu == "About Me":
-    st.subheader("About Me")
-    st.markdown('<div class="text-box">', unsafe_allow_html=True)
-    st.write("""
-    **Hey, I'm Samyak Pokharna!**  
-    I have a background in **Mechanical Engineering** and an intense passion for **Data Science, Analytics, and Football**.
-    
-    - **Education:** MS in Analytics at **University of Illinois Urbana-Champaign**.
-    - **Technical Skills:** Expertise in **data visualization, statistical modeling, SQL, Python**, and more.
-    - **Football Enthusiast:** Passionate about analyzing player performances, tactics, and data-driven football insights.
-    - **Other Interests:** I enjoy **reading autobiographies, playing football, cricket, badminton**, and watching tactical football breakdowns.
-    
-    Want to collaborate or discuss football analytics?  
-    📧 **Email:** samyakp3@illinois.edu  
-    🔗 **LinkedIn:** [linkedin.com/in/samyakpokharna](#)
-    """)
-    st.markdown('</div>', unsafe_allow_html=True)
+    display_text_box(
+        "About Me - Samyak Pokharna",
+        """
+        Hi, I’m Samyak Pokharna! Passionate about data science and football, I specialize in statistical modeling, predictive analytics, and data visualization.
+        
+        - **Education:** MS in Analytics at University of Illinois Urbana-Champaign.
+        - **Skills:** Python, SQL, Tableau, Power BI, Machine Learning, Web Scraping.
+        - **Hobbies:** Playing Football, Cricket, Badminton, and Reading Autobiographies.
+        
+        📧 **Email:** samyakp3@illinois.edu  
+        🔗 **LinkedIn:** [linkedin.com/in/samyakpokharna](#)
+        """
+    )
 
+# Apply to Abbreviations Section
 if menu == "Abbreviations":
-    st.subheader("Football Statistical Abbreviations")
-    st.markdown('<div class="text-box">', unsafe_allow_html=True)
-    abbreviations = {
-        "xG": "Expected Goals - A measure of the quality of chances a player gets.",
-        "xAG": "Expected Assists - The likelihood of a pass resulting in a goal.",
-        "npxG": "Non-Penalty Expected Goals - Expected goals excluding penalties.",
-        "PrgP": "Progressive Passes - Passes that move the ball significantly forward.",
-        "PrgC": "Progressive Carries - Carries that move the ball forward into attacking areas.",
-        "PrgR": "Progressive Runs - Runs with the ball that advance play into dangerous zones.",
-        "G_per_xG": "Goals per Expected Goals - Measures finishing efficiency.",
-        "Ast_per_xAG": "Assists per Expected Assists - Evaluates the quality of key passes.",
-    }
-    for abbr, meaning in abbreviations.items():
-        st.write(f"- **{abbr}**: {meaning}")
-    st.markdown('</div>', unsafe_allow_html=True)
+    display_text_box(
+        "Football Statistical Abbreviations",
+        """
+        - **xG**: Expected Goals – Probability of a shot resulting in a goal.
+        - **xAG**: Expected Assists – Quality of a player’s passing contributions.
+        - **npxG**: Non-Penalty Expected Goals – Expected goals excluding penalties.
+        - **PrgP**: Progressive Passes – Passes that move the ball significantly forward.
+        - **PrgC**: Progressive Carries – Dribbles that move the ball forward.
+        - **G_per_xG**: Goals per Expected Goals – Evaluates a player's finishing ability.
+        """
+    )
 
