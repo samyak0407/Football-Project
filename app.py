@@ -163,30 +163,26 @@ if menu == "About Me":
     display_text_box(
         "ABOUT ME - SAMYAK POKHARNA",
         """
-        <p>I am Samyak Pokharna, a data scientist passionate about football analytics. With an engineering background, I transitioned into AI-driven analytics, focusing on predictive modeling, machine learning, and visualization techniques.</p>
+        I am Samyak Pokharna, a data scientist passionate about football analytics. With an engineering background, I transitioned into AI-driven analytics, focusing on predictive modeling, machine learning, and visualization techniques.
 
-        <ul>
-        <li><b>Data Analytics & Visualization:</b> Python, SQL, Tableau, Power BI</li>
-        <li><b>Machine Learning & Predictive Modeling:</b> Regression, Classification, Time-Series Forecasting</li>
-        <li><b>Data Engineering:</b> Web Scraping, Data Cleaning, Feature Engineering</li>
-        <li><b>Football Analytics:</b> Player Performance Prediction, Tactical Data Analysis</li>
-        </ul>
+        **Technical Skills:**
+        Data Analytics & Visualization (Python, SQL, Tableau, Power BI), 
+        Machine Learning & Predictive Modeling (Regression, Classification, Time-Series Forecasting), 
+        Data Engineering (Web Scraping, Data Cleaning, Feature Engineering), 
+        Football Analytics (Player Performance Prediction, Tactical Data Analysis).
 
-        <b>Hobbies & Interests:</b>
-        <ul>
-        <li>Playing <b>Football, Cricket, and Badminton</b></li>
-        <li>Reading <b>Autobiographies and Analytical Books</b></li>
-        <li>Exploring <b>New Technologies in Data Science & AI</b></li>
-        </ul>
+        **Hobbies & Interests:**
+        Playing Football, Cricket, and Badminton, 
+        Reading Autobiographies and Analytical Books, 
+        Exploring New Technologies in Data Science & AI.
 
-        <b>Let's Connect:</b>
-        <ul>
-        <li><b>Email:</b> samyakp3@illinois.edu</li>
-        <li><b>LinkedIn:</b> <a href='https://www.linkedin.com/in/samyakpokharna' target='_blank'>linkedin.com/in/samyakpokharna</a></li>
-        <li><b>GitHub:</b> <a href='https://github.com/samyak0407' target='_blank'>github.com/samyak0407</a></li>
-        </ul>
+        **Let's Connect:**
+        Email: samyakp3@illinois.edu, 
+        LinkedIn: [linkedin.com/in/samyakpokharna](https://www.linkedin.com/in/samyakpokharna), 
+        GitHub: [github.com/samyak0407](https://github.com/samyak0407).
         """
     )
+
 
 # Abbreviations Section
 if menu == "Abbreviations":
