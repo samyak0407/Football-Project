@@ -103,7 +103,14 @@ menu = st.sidebar.radio("Navigation", ["Player Analysis", "Compare Players", "Da
 
 if menu == "Player Analysis":
     st.subheader("Player Performance Analysis")
-    st.dataframe(df)  # Ensure the table displays correctly
+    squads = df["Squad"].unique()
+    selected_squad = st.selectbox("Select a Squad", ["All"] + list(squads))
+    if selected_squad != "All":
+        filtered_df = df[df["Squad"] == selected_squad]
+        st.dataframe(filtered_df)
+    else:
+        st.dataframe(df)
+
 
 if menu == "Data Visualizations":
     st.subheader("Top Performers by Category")
@@ -147,16 +154,40 @@ if menu == "Project Overview":
     display_text_box(
         "PROJECT OVERVIEW",
         """
-        <p><b>Premier League Player Performance Predictor</b></p>
-        <ul>
-        <li><b>Data Cleaning:</b> Handling missing values, normalizing nation names, and refining player positions.</li>
-        <li><b>Feature Engineering:</b> Constructing performance metrics such as 'Fair Contribution Score' to balance evaluations.</li>
-        <li><b>Visualizations & Insights:</b> Interactive dashboards to explore player statistics and analyze trends.</li>
-        <li><b>Predictive Analytics:</b> Implementing machine learning models to forecast player performance.</li>
-        <li><b>Web Scraping & Automation:</b> Extracting live player data for up-to-date analysis.</li>
-        </ul>
+        The **Premier League Player Performance Predictor** is designed to provide an advanced statistical analysis of player contributions across different metrics. This project utilizes data science methodologies to refine raw performance data, generate insightful visualizations, and develop predictive models for a more comprehensive evaluation of players.
+        
+        **Core Aspects of the Project:**
+        
+        - **Data Cleaning & Preprocessing:**
+          - Standardization of player details including nationality, position, and playing time.
+          - Handling missing data and ensuring consistency across datasets.
+          - Formatting player birthdates and cleaning textual inconsistencies.
+        
+        - **Feature Engineering & Metric Development:**
+          - Constructing enhanced performance metrics like *Fair Contribution Score* to ensure unbiased evaluations.
+          - Developing new features such as *Expected Goal Contribution per 90 minutes* to refine impact measurement.
+        
+        - **Data Visualization & Interactive Analysis:**
+          - Creating dynamic dashboards for in-depth exploration of player statistics.
+          - Allowing comparisons between players, teams, and positions using interactive charts.
+          - Integrating positional filters to categorize players into Forwards, Midfielders, and Defenders.
+        
+        - **Predictive Analytics & Model Building:**
+          - Implementing regression-based models to predict player impact based on past performance.
+          - Analyzing correlations between key performance indicators and real-world contributions.
+        
+        - **Web Scraping & Live Data Integration:**
+          - Automating data extraction from official Premier League sources to keep player statistics updated.
+          - Expanding the dataset to include market valuation, injury records, and transfer insights.
+        
+        - **Bias Reduction & Fair Evaluation:**
+          - Adjusting rankings to ensure that players with fewer minutes played do not disproportionately influence leaderboards.
+          - Implementing filters to highlight top performers based on minimum playing time thresholds.
+        
+        This project is an evolving data-driven tool aimed at enhancing the understanding of player performance beyond traditional statistics. It is built to assist analysts, coaches, and fans in gaining deeper insights into football analytics.
         """
     )
+
 
 # About Me Section
 if menu == "About Me":
