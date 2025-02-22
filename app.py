@@ -15,17 +15,25 @@ st.set_page_config(
     layout="wide"
 )
 
-# Custom CSS for background image with blur effect
+# Custom CSS for background image with blur effect on background only
 page_bg_img = '''
 <style>
 .stApp {
     background: url("https://raw.githubusercontent.com/samyak0407/Football-Project/main/GettyImages-2184014913.webp");
     background-size: cover;
     background-position: center;
+}
+
+.stApp::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: inherit;
     filter: blur(5px);
-    -webkit-filter: blur(5px);
-    color: white;
-    text-shadow: 1px 1px 2px black;
+    z-index: -1;
 }
 </style>
 '''
@@ -41,7 +49,7 @@ def load_data():
     df.index += 1  # Adjust index so it starts from 1 instead of 0
     
     # Clean DOB column (remove commas)
-    df["Born"] = df["Born"].str.replace(",", "")
+    df["Born"] = df["Born"].astype(str).str.replace(",", "")
     
     # Standardize nation names
     country_mapping = {
@@ -119,6 +127,7 @@ if menu == "Compare Players":
         selected_stat = st.selectbox("Select Statistic to Compare", numeric_columns)
         fig = px.bar(comparison_df, x="Player", y=selected_stat, title=f"Comparison of {selected_stat}", color="Player")
         st.plotly_chart(fig)
+
 if menu == "Project Overview":
     st.title("Project Overview")
     st.write("## Premier League Player Performance Predictor")
