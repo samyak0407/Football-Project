@@ -138,7 +138,7 @@ if menu == "Compare Players":
         st.plotly_chart(fig)
 
 
- # Custom CSS for text box with opaque background
+# Custom CSS for text box with opaque background
 text_box_style = """
     <style>
     .text-box {
@@ -149,12 +149,19 @@ text_box_style = """
         font-size: 18px;
         margin: 20px auto;
         max-width: 85%;
-        text-align: center;
+        text-align: left;
         box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.5);
     }
-    .text-box h2, .text-box h3 {
+    .text-box h1 {
         color: #ffffff; /* Ensure text is visible */
+        font-size: 24px;
+        font-weight: bold;
         margin-bottom: 10px;
+        text-transform: uppercase;
+    }
+    .text-box ul {
+        list-style-type: disc; /* Bullet points */
+        padding-left: 20px;
     }
     </style>
 """
@@ -162,16 +169,31 @@ st.markdown(text_box_style, unsafe_allow_html=True)
 
 # Function to display content inside a styled box
 def display_text_box(title, content):
-    st.markdown(f'<div class="text-box"><h2>{title}</h2>{content}</div>', unsafe_allow_html=True)
+    st.markdown(f'<div class="text-box"><h1>{title}</h1>{content}</div>', unsafe_allow_html=True)
 
-# About Me Section without Hashtags
+# Project Overview Section
+if menu == "Project Overview":
+    display_text_box(
+        "PROJECT OVERVIEW",
+        """
+        <p><b>Premier League Player Performance Predictor</b></p>
+        <ul>
+        <li><b>Data Cleaning:</b> Handling missing values, normalizing nation names, and refining player positions.</li>
+        <li><b>Feature Engineering:</b> Constructing performance metrics such as 'Fair Contribution Score' to balance evaluations.</li>
+        <li><b>Visualizations & Insights:</b> Interactive dashboards to explore player statistics and analyze trends.</li>
+        <li><b>Predictive Analytics:</b> Implementing machine learning models to forecast player performance.</li>
+        <li><b>Web Scraping & Automation:</b> Extracting live player data for up-to-date analysis.</li>
+        </ul>
+        """
+    )
+
+# About Me Section
 if menu == "About Me":
     display_text_box(
-        "About Me - Samyak Pokharna",
+        "ABOUT ME - SAMYAK POKHARNA",
         """
         <p>I am Samyak Pokharna, a data scientist passionate about football analytics. With an engineering background, I transitioned into AI-driven analytics, focusing on predictive modeling, machine learning, and visualization techniques.</p>
 
-        <h2>Technical Skills</h2>
         <ul>
         <li><b>Data Analytics & Visualization:</b> Python, SQL, Tableau, Power BI</li>
         <li><b>Machine Learning & Predictive Modeling:</b> Regression, Classification, Time-Series Forecasting</li>
@@ -179,16 +201,34 @@ if menu == "About Me":
         <li><b>Football Analytics:</b> Player Performance Prediction, Tactical Data Analysis</li>
         </ul>
 
-        <h2>Hobbies & Interests</h2>
+        <b>Hobbies & Interests:</b>
         <ul>
         <li>Playing <b>Football, Cricket, and Badminton</b></li>
         <li>Reading <b>Autobiographies and Analytical Books</b></li>
         <li>Exploring <b>New Technologies in Data Science & AI</b></li>
         </ul>
 
-        <h2>Let's Connect</h2>
-        <p>📧 <b>Email:</b> samyakp3@illinois.edu</p>
-        <p>🔗 <b>LinkedIn:</b> <a href='https://www.linkedin.com/in/samyakpokharna' target='_blank'>linkedin.com/in/samyakpokharna</a></p>
-        <p>📂 <b>GitHub:</b> <a href='https://github.com/samyak0407' target='_blank'>github.com/samyak0407</a></p>
+        <b>Let's Connect:</b>
+        <ul>
+        <li>📧 <b>Email:</b> samyakp3@illinois.edu</li>
+        <li>🔗 <b>LinkedIn:</b> <a href='https://www.linkedin.com/in/samyakpokharna' target='_blank'>linkedin.com/in/samyakpokharna</a></li>
+        <li>📂 <b>GitHub:</b> <a href='https://github.com/samyak0407' target='_blank'>github.com/samyak0407</a></li>
+        </ul>
+        """
+    )
+
+# Abbreviations Section
+if menu == "Abbreviations":
+    display_text_box(
+        "FOOTBALL STATISTICAL ABBREVIATIONS",
+        """
+        <ul>
+        <li><b>xG:</b> Expected Goals</li>
+        <li><b>xAG:</b> Expected Assists</li>
+        <li><b>npxG:</b> Non-Penalty Expected Goals</li>
+        <li><b>PrgP:</b> Progressive Passes</li>
+        <li><b>PrgC:</b> Progressive Carries</li>
+        <li><b>PrgR:</b> Progressive Runs</li>
+        </ul>
         """
     )
