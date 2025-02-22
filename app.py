@@ -102,7 +102,9 @@ df = load_data()
 menu = st.sidebar.radio("Navigation", ["Player Analysis", "Compare Players", "Data Visualizations", "Project Overview", "About Me", "Abbreviations"])
 
 if menu == "Data Visualizations":
-    st.subheader("Top Performers by Category (Min. 1000 Minutes)")
+    st.subheader("Top Performers by Category")
+    min_minutes = st.slider("Minimum Minutes Played", min_value=0, max_value=int(df["Minutes Played"].max()), value=1000)
+    position_filter = st.selectbox("Select Position", ["All"] + df["Pos"].unique().tolist())
     numeric_columns = df.select_dtypes(include=[np.number]).columns.tolist()
     excluded_columns = ["Player", "Nation", "Pos", "Squad"]
     numeric_columns = [col for col in numeric_columns if col not in excluded_columns]
@@ -110,9 +112,12 @@ if menu == "Data Visualizations":
     selected_metric = st.selectbox("Select Metric to View Top Players", numeric_columns)
     
     if selected_metric:
-        top_players = df[df["Minutes Played"] >= 1000].nlargest(10, selected_metric)
+        filtered_df = df[df["Minutes Played"] >= min_minutes]
+        if position_filter != "All":
+            filtered_df = filtered_df[filtered_df["Pos"] == position_filter]
+        top_players = filtered_df.nlargest(10, selected_metric)
         fig = px.bar(top_players, x=selected_metric, y="Player", orientation='h',
-                     title=f"Top 10 Players by {selected_metric} (Min. 1000 Minutes)", color="Player")
+                     title=f"Top 10 {position_filter} Players by {selected_metric} (Min. {min_minutes} Minutes)", color="Player")
         st.plotly_chart(fig)
 
 if menu == "Compare Players":
@@ -127,6 +132,9 @@ if menu == "Compare Players":
         selected_stat = st.selectbox("Select Statistic to Compare", numeric_columns)
         fig = px.bar(comparison_df, x="Player", y=selected_stat, title=f"Comparison of {selected_stat}", color="Player")
         st.plotly_chart(fig)
+
+st.sidebar.write("### Adjust Data Filters for Fair Rankings")
+st.sidebar.write("Modify the minimum minutes and position to ensure fair comparison across all players.")
 
 if menu == "Project Overview":
     st.title("Project Overview")
