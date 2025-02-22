@@ -190,8 +190,8 @@ if menu == "About Me":
     st.write("📧 Email: samyakp3@illinois.edu")
     st.write("📱 LinkedIn: [linkedin.com/in/samyakpokharna](https://www.linkedin.com/in/samyakpokharna)")
     st.write("📂 GitHub: [github.com/samyak0407](https://github.com/samyak0407)")
-   # Custom CSS for text box with opaque background
-opaque_box_style = """
+  # Custom CSS for text box with opaque background
+text_box_style = """
     <style>
     .text-box {
         background-color: rgba(0, 0, 0, 0.7);  /* Dark background with opacity */
@@ -199,61 +199,78 @@ opaque_box_style = """
         border-radius: 10px;
         color: white;
         font-size: 18px;
-        margin: 20px 0;
+        margin: 20px auto;
+        max-width: 85%;
+        text-align: center;
+        box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.5);
     }
     </style>
 """
-st.markdown(opaque_box_style, unsafe_allow_html=True)
+st.markdown(text_box_style, unsafe_allow_html=True)
 
-# Function to display content inside an opaque box
+# Function to display content inside a styled box
 def display_text_box(title, content):
-    st.subheader(title)
-    st.markdown('<div class="text-box">', unsafe_allow_html=True)
-    st.write(content)
-    st.markdown('</div>', unsafe_allow_html=True)
+    st.markdown(f'<div class="text-box"><h2>{title}</h2><p>{content}</p></div>', unsafe_allow_html=True)
 
-# Apply to Project Overview
+# Project Overview
 if menu == "Project Overview":
     display_text_box(
         "Project Overview",
         """
-        This project provides an in-depth analysis of Premier League player performances, leveraging advanced analytics, machine learning, and interactive visualizations.
-        
-        - **Data Cleaning:** Standardized country names, refined position classification, and formatted statistics.
-        - **Feature Engineering:** Created meaningful new metrics to better capture player impact.
-        - **Visual Analytics:** Implemented engaging interactive charts for player insights.
-        - **Machine Learning:** Developed predictive models to estimate player market value.
-        - **Deployment:** Hosted on Streamlit for easy access and exploration.
+        This project aims to provide a deep, unbiased analysis of player performance using advanced statistical models. 
+        By leveraging data from the Premier League, we process raw statistics, clean and transform the data, apply feature engineering, 
+        and build predictive models to assess player impact fairly.
+
+        ### Key Aspects of the Project:
+        - **Data Cleaning:** Handling missing values, normalizing nation names, and refining player positions.
+        - **Feature Engineering:** Constructing new performance metrics such as 'Fair Contribution Score' to balance impact evaluation.
+        - **Visualizations & Insights:** Interactive dashboards to explore player statistics, compare performances, and analyze trends.
+        - **Predictive Analytics:** Implementing machine learning techniques to forecast player contributions.
+        - **Web Scraping & Automation:** Extracting live player data to keep the analysis up-to-date and relevant.
         """
     )
 
-# Apply to About Me
+# About Me
 if menu == "About Me":
     display_text_box(
         "About Me - Samyak Pokharna",
         """
-        Hi, I’m Samyak Pokharna! Passionate about data science and football, I specialize in statistical modeling, predictive analytics, and data visualization.
-        
-        - **Education:** MS in Analytics at University of Illinois Urbana-Champaign.
-        - **Skills:** Python, SQL, Tableau, Power BI, Machine Learning, Web Scraping.
-        - **Hobbies:** Playing Football, Cricket, Badminton, and Reading Autobiographies.
-        
+        I am Samyak Pokharna, a passionate data scientist with a deep love for football and analytics. 
+        My journey into data science began with my engineering background, where I realized the power of data-driven decision-making. 
+        Over time, I transitioned into analytics, focusing on predictive modeling, machine learning, and visualization techniques.
+
+        ### Technical Skills:
+        - **Data Analytics & Visualization:** Python, SQL, Tableau, Power BI
+        - **Machine Learning & Predictive Modeling:** Regression, Classification, Time-Series Forecasting
+        - **Data Engineering:** Web Scraping, Data Cleaning, Feature Engineering
+        - **Football Analytics:** Player Performance Prediction, Tactical Data Analysis
+
+        ### Hobbies & Interests:
+        - Playing **Football, Cricket, and Badminton**
+        - Reading **Autobiographies and Analytical Books**
+        - Exploring **New Technologies in Data Science & AI**
+
+        ### Let's Connect:
         📧 **Email:** samyakp3@illinois.edu  
-        🔗 **LinkedIn:** [linkedin.com/in/samyakpokharna](#)
+        🔗 **LinkedIn:** [linkedin.com/in/samyakpokharna](https://www.linkedin.com/in/samyakpokharna)  
+        📂 **GitHub:** [github.com/samyak0407](https://github.com/samyak0407)  
         """
     )
 
-# Apply to Abbreviations Section
+# Abbreviations
 if menu == "Abbreviations":
     display_text_box(
         "Football Statistical Abbreviations",
         """
-        - **xG**: Expected Goals – Probability of a shot resulting in a goal.
-        - **xAG**: Expected Assists – Quality of a player’s passing contributions.
-        - **npxG**: Non-Penalty Expected Goals – Expected goals excluding penalties.
-        - **PrgP**: Progressive Passes – Passes that move the ball significantly forward.
-        - **PrgC**: Progressive Carries – Dribbles that move the ball forward.
-        - **G_per_xG**: Goals per Expected Goals – Evaluates a player's finishing ability.
+        Understanding football analytics requires knowing key statistical abbreviations used in player performance metrics.
+
+        - **xG:** Expected Goals (Likelihood of scoring based on shot quality)
+        - **xAG:** Expected Assists (Likelihood of assisting a goal)
+        - **npxG:** Non-Penalty Expected Goals (xG excluding penalties)
+        - **PrgP:** Progressive Passes (Passes moving the ball significantly forward)
+        - **PrgC:** Progressive Carries (Dribbles carrying the ball forward)
+        - **PrgR:** Progressive Runs (Runs carrying the ball into the attacking third)
+
+        This section ensures you fully understand the metrics used in our analysis.
         """
     )
-
