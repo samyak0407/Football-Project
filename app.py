@@ -101,6 +101,10 @@ df = load_data()
 # Sidebar Navigation
 menu = st.sidebar.radio("Navigation", ["Player Analysis", "Compare Players", "Data Visualizations", "Project Overview", "About Me", "Abbreviations"])
 
+if menu == "Player Analysis":
+    st.subheader("Player Performance Analysis")
+    st.dataframe(df)  # Ensure the table displays correctly
+
 if menu == "Data Visualizations":
     st.subheader("Top Performers by Category")
     min_minutes = st.slider("Minimum Minutes Played", min_value=0, max_value=int(df["Minutes Played"].max()), value=1000)
@@ -127,14 +131,24 @@ if menu == "Compare Players":
     
     if selected_players:
         comparison_df = df[df["Player"].isin(selected_players)]
-        st.write(comparison_df)
+        st.dataframe(comparison_df)
         numeric_columns = df.select_dtypes(include=[np.number]).columns.tolist()
         selected_stat = st.selectbox("Select Statistic to Compare", numeric_columns)
         fig = px.bar(comparison_df, x="Player", y=selected_stat, title=f"Comparison of {selected_stat}", color="Player")
         st.plotly_chart(fig)
 
-st.sidebar.write("### Adjust Data Filters for Fair Rankings")
-st.sidebar.write("Modify the minimum minutes and position to ensure fair comparison across all players.")
+if menu == "Abbreviations":
+    st.subheader("Football Statistical Abbreviations")
+    abbreviations = {
+        "xG": "Expected Goals",
+        "xAG": "Expected Assists",
+        "npxG": "Non-Penalty Expected Goals",
+        "PrgP": "Progressive Passes",
+        "PrgC": "Progressive Carries",
+        "PrgR": "Progressive Runs"
+    }
+    for abbr, meaning in abbreviations.items():
+        st.write(f"- **{abbr}**: {meaning}")
 
 if menu == "Project Overview":
     st.title("Project Overview")
