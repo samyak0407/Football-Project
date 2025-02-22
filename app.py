@@ -138,7 +138,7 @@ if menu == "Compare Players":
         st.plotly_chart(fig)
 
 
-  # Custom CSS for text box with opaque background
+ # Custom CSS for text box with opaque background
 text_box_style = """
     <style>
     .text-box {
@@ -152,73 +152,43 @@ text_box_style = """
         text-align: center;
         box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.5);
     }
+    .text-box h2, .text-box h3 {
+        color: #ffffff; /* Ensure text is visible */
+        margin-bottom: 10px;
+    }
     </style>
 """
 st.markdown(text_box_style, unsafe_allow_html=True)
 
 # Function to display content inside a styled box
 def display_text_box(title, content):
-    st.markdown(f'<div class="text-box"><h2>{title}</h2><p>{content}</p></div>', unsafe_allow_html=True)
+    st.markdown(f'<div class="text-box"><h2>{title}</h2>{content}</div>', unsafe_allow_html=True)
 
-# Project Overview
-if menu == "Project Overview":
-    display_text_box(
-        "Project Overview",
-        """
-        This project aims to provide a deep, unbiased analysis of player performance using advanced statistical models. 
-        By leveraging data from the Premier League, we process raw statistics, clean and transform the data, apply feature engineering, 
-        and build predictive models to assess player impact fairly.
-
-        ### Key Aspects of the Project:
-        - **Data Cleaning:** Handling missing values, normalizing nation names, and refining player positions.
-        - **Feature Engineering:** Constructing new performance metrics such as 'Fair Contribution Score' to balance impact evaluation.
-        - **Visualizations & Insights:** Interactive dashboards to explore player statistics, compare performances, and analyze trends.
-        - **Predictive Analytics:** Implementing machine learning techniques to forecast player contributions.
-        - **Web Scraping & Automation:** Extracting live player data to keep the analysis up-to-date and relevant.
-        """
-    )
-
-# About Me
+# About Me Section without Hashtags
 if menu == "About Me":
     display_text_box(
         "About Me - Samyak Pokharna",
         """
-        I am Samyak Pokharna, a passionate data scientist with a deep love for football and analytics. 
-        My journey into data science began with my engineering background, where I realized the power of data-driven decision-making. 
-        Over time, I transitioned into analytics, focusing on predictive modeling, machine learning, and visualization techniques.
+        <p>I am Samyak Pokharna, a data scientist passionate about football analytics. With an engineering background, I transitioned into AI-driven analytics, focusing on predictive modeling, machine learning, and visualization techniques.</p>
 
-        ### Technical Skills:
-        - **Data Analytics & Visualization:** Python, SQL, Tableau, Power BI
-        - **Machine Learning & Predictive Modeling:** Regression, Classification, Time-Series Forecasting
-        - **Data Engineering:** Web Scraping, Data Cleaning, Feature Engineering
-        - **Football Analytics:** Player Performance Prediction, Tactical Data Analysis
+        <h2>Technical Skills</h2>
+        <ul>
+        <li><b>Data Analytics & Visualization:</b> Python, SQL, Tableau, Power BI</li>
+        <li><b>Machine Learning & Predictive Modeling:</b> Regression, Classification, Time-Series Forecasting</li>
+        <li><b>Data Engineering:</b> Web Scraping, Data Cleaning, Feature Engineering</li>
+        <li><b>Football Analytics:</b> Player Performance Prediction, Tactical Data Analysis</li>
+        </ul>
 
-        ### Hobbies & Interests:
-        - Playing **Football, Cricket, and Badminton**
-        - Reading **Autobiographies and Analytical Books**
-        - Exploring **New Technologies in Data Science & AI**
+        <h2>Hobbies & Interests</h2>
+        <ul>
+        <li>Playing <b>Football, Cricket, and Badminton</b></li>
+        <li>Reading <b>Autobiographies and Analytical Books</b></li>
+        <li>Exploring <b>New Technologies in Data Science & AI</b></li>
+        </ul>
 
-        ### Let's Connect:
-        📧 **Email:** samyakp3@illinois.edu  
-        🔗 **LinkedIn:** [linkedin.com/in/samyakpokharna](https://www.linkedin.com/in/samyakpokharna)  
-        📂 **GitHub:** [github.com/samyak0407](https://github.com/samyak0407)  
-        """
-    )
-
-# Abbreviations
-if menu == "Abbreviations":
-    display_text_box(
-        "Football Statistical Abbreviations",
-        """
-        Understanding football analytics requires knowing key statistical abbreviations used in player performance metrics.
-
-        - **xG:** Expected Goals (Likelihood of scoring based on shot quality)
-        - **xAG:** Expected Assists (Likelihood of assisting a goal)
-        - **npxG:** Non-Penalty Expected Goals (xG excluding penalties)
-        - **PrgP:** Progressive Passes (Passes moving the ball significantly forward)
-        - **PrgC:** Progressive Carries (Dribbles carrying the ball forward)
-        - **PrgR:** Progressive Runs (Runs carrying the ball into the attacking third)
-
-        This section ensures you fully understand the metrics used in our analysis.
+        <h2>Let's Connect</h2>
+        <p>📧 <b>Email:</b> samyakp3@illinois.edu</p>
+        <p>🔗 <b>LinkedIn:</b> <a href='https://www.linkedin.com/in/samyakpokharna' target='_blank'>linkedin.com/in/samyakpokharna</a></p>
+        <p>📂 <b>GitHub:</b> <a href='https://github.com/samyak0407' target='_blank'>github.com/samyak0407</a></p>
         """
     )
