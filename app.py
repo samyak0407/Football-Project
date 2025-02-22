@@ -19,7 +19,7 @@ st.set_page_config(
 page_bg_img = '''
 <style>
 .stApp {
-    background: url("https://raw.githubusercontent.com/samyak0407/Football-Project/main/GettyImages-2184014913.webp");
+    background: url("https://github.com/samyak0407/Football-Project/blob/main/NINTCHDBPICT000733331015.webp");
     background-size: cover;
     background-position: center;
 }
