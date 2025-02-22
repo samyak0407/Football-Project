@@ -137,59 +137,7 @@ if menu == "Compare Players":
         fig = px.bar(comparison_df, x="Player", y=selected_stat, title=f"Comparison of {selected_stat}", color="Player")
         st.plotly_chart(fig)
 
-if menu == "Abbreviations":
-    st.subheader("Football Statistical Abbreviations")
-    abbreviations = {
-        "xG": "Expected Goals",
-        "xAG": "Expected Assists",
-        "npxG": "Non-Penalty Expected Goals",
-        "PrgP": "Progressive Passes",
-        "PrgC": "Progressive Carries",
-        "PrgR": "Progressive Runs"
-    }
-    for abbr, meaning in abbreviations.items():
-        st.write(f"- **{abbr}**: {meaning}")
 
-if menu == "Project Overview":
-    st.title("Project Overview")
-    st.write("## Premier League Player Performance Predictor")
-    st.write(
-        "This project aims to provide a deep, unbiased analysis of player performance using advanced statistical models. "
-        "By leveraging data from the Premier League, we process raw statistics, clean and transform the data, apply feature engineering, "
-        "and build predictive models to assess player impact fairly."
-    )
-    
-    st.write("### Key Aspects of the Project")
-    st.write("- **Data Cleaning:** Handling missing values, normalizing nation names, and refining player positions.")
-    st.write("- **Feature Engineering:** Constructing new performance metrics such as 'Fair Contribution Score' to balance impact evaluation for players with different playing times.")
-    st.write("- **Visualizations & Insights:** Interactive dashboards to explore player statistics, compare performances, and analyze trends across different playing positions.")
-    st.write("- **Predictive Analytics:** Implementing machine learning techniques to forecast player contributions and identify undervalued talent.")
-    st.write("- **Web Scraping & Automation:** Extracting live player data to keep the analysis up-to-date and relevant.")
-
-if menu == "About Me":
-    st.title("About Me - Samyak Pokharna")
-    st.write("## Data Scientist | Football Analytics Enthusiast | Engineer")
-    st.write(
-        "I am Samyak Pokharna, a passionate data scientist with a deep love for football and analytics. "
-        "My journey into data science began with my engineering background, where I realized the power of data-driven decision-making. "
-        "Over time, I transitioned into analytics, focusing on predictive modeling, machine learning, and visualization techniques."
-    )
-    
-    st.write("### Technical Skills")
-    st.write("- **Data Analytics & Visualization:** Python, SQL, Tableau, Power BI")
-    st.write("- **Machine Learning & Predictive Modeling:** Regression, Classification, Time-Series Forecasting")
-    st.write("- **Data Engineering:** Web Scraping, Data Cleaning, Feature Engineering")
-    st.write("- **Football Analytics:** Player Performance Prediction, Tactical Data Analysis")
-
-    st.write("### Hobbies & Interests")
-    st.write("- Playing **Football, Cricket, and Badminton**")
-    st.write("- Reading **Autobiographies and Analytical Books**")
-    st.write("- Exploring **New Technologies in Data Science & AI**")
-
-    st.write("### Let's Connect!")
-    st.write("📧 Email: samyakp3@illinois.edu")
-    st.write("📱 LinkedIn: [linkedin.com/in/samyakpokharna](https://www.linkedin.com/in/samyakpokharna)")
-    st.write("📂 GitHub: [github.com/samyak0407](https://github.com/samyak0407)")
   # Custom CSS for text box with opaque background
 text_box_style = """
     <style>
