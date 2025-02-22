@@ -138,35 +138,6 @@ if menu == "Compare Players":
         st.plotly_chart(fig)
 
 
-# Custom CSS for text box with opaque background
-text_box_style = """
-    <style>
-    .text-box {
-        background-color: rgba(0, 0, 0, 0.7);  /* Dark background with opacity */
-        padding: 20px;
-        border-radius: 10px;
-        color: white;
-        font-size: 18px;
-        margin: 20px auto;
-        max-width: 85%;
-        text-align: left;
-        box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.5);
-    }
-    .text-box h1 {
-        color: #ffffff; /* Ensure text is visible */
-        font-size: 24px;
-        font-weight: bold;
-        margin-bottom: 10px;
-        text-transform: uppercase;
-    }
-    .text-box ul {
-        list-style-type: disc; /* Bullet points */
-        padding-left: 20px;
-    }
-    </style>
-"""
-st.markdown(text_box_style, unsafe_allow_html=True)
-
 # Function to display content inside a styled box
 def display_text_box(title, content):
     st.markdown(f'<div class="text-box"><h1>{title}</h1>{content}</div>', unsafe_allow_html=True)
@@ -210,9 +181,9 @@ if menu == "About Me":
 
         <b>Let's Connect:</b>
         <ul>
-        <li>📧 <b>Email:</b> samyakp3@illinois.edu</li>
-        <li>🔗 <b>LinkedIn:</b> <a href='https://www.linkedin.com/in/samyakpokharna' target='_blank'>linkedin.com/in/samyakpokharna</a></li>
-        <li>📂 <b>GitHub:</b> <a href='https://github.com/samyak0407' target='_blank'>github.com/samyak0407</a></li>
+        <li><b>Email:</b> samyakp3@illinois.edu</li>
+        <li><b>LinkedIn:</b> <a href='https://www.linkedin.com/in/samyakpokharna' target='_blank'>linkedin.com/in/samyakpokharna</a></li>
+        <li><b>GitHub:</b> <a href='https://github.com/samyak0407' target='_blank'>github.com/samyak0407</a></li>
         </ul>
         """
     )
