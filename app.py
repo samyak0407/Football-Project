@@ -165,18 +165,18 @@ if menu == "About Me":
         """
         I am Samyak Pokharna, a data scientist passionate about football analytics. With an engineering background, I transitioned into AI-driven analytics, focusing on predictive modeling, machine learning, and visualization techniques.
 
-        **Technical Skills:**
+        Technical Skills:
         Data Analytics & Visualization (Python, SQL, Tableau, Power BI), 
         Machine Learning & Predictive Modeling (Regression, Classification, Time-Series Forecasting), 
         Data Engineering (Web Scraping, Data Cleaning, Feature Engineering), 
         Football Analytics (Player Performance Prediction, Tactical Data Analysis).
 
-        **Hobbies & Interests:**
+        Hobbies & Interests:
         Playing Football, Cricket, and Badminton, 
         Reading Autobiographies and Analytical Books, 
         Exploring New Technologies in Data Science & AI.
 
-        **Let's Connect:**
+        Let's Connect:
         Email: samyakp3@illinois.edu, 
         LinkedIn: [linkedin.com/in/samyakpokharna](https://www.linkedin.com/in/samyakpokharna), 
         GitHub: [github.com/samyak0407](https://github.com/samyak0407).
